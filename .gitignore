@@ -1,0 +1,16 @@
+# Claude AI workspace
+.claude/
+
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db

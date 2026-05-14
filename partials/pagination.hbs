@@ -1,0 +1,35 @@
+{{!-- ==========================================
+     AURA Theme - Pagination Partial
+     ========================================== --}}
+{{#if pagination}}
+<nav class="pagination" role="navigation" aria-label="Pagination">
+    {{#if pagination.prev}}
+    <a href="{{pagination.prev.url}}" class="pagination__btn" aria-label="Previous page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+    {{/if}}
+
+    <div class="pagination__pages">
+        {{#foreach pagination.pages}}
+        <a
+            href="{{url}}"
+            class="pagination__btn{{#if current}} active{{/if}}"
+            aria-label="Page {{number}}"
+            {{#if current}}aria-current="page"{{/if}}
+        >
+            {{number}}
+        </a>
+        {{/foreach}}
+    </div>
+
+    {{#if pagination.next}}
+    <a href="{{pagination.next.url}}" class="pagination__btn" aria-label="Next page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </a>
+    {{/if}}
+</nav>
+{{/if}}

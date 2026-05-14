@@ -1,0 +1,86 @@
+{{!-- ==========================================
+     BlogX Theme - Main Layout
+     Design: High-Velocity Content Architecture
+     ========================================== --}}
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="dark">
+<head>
+    {{!-- Meta Tags --}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{#if @site.description}}{{@site.description}}{{else}}High-velocity content architecture for modern SaaS and systems engineering.{{/if}}">
+    <meta name="theme-color" content="#020203">
+
+    {{!-- Open Graph --}}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{#if @site.title}}{{@site.title}}{{else}}BlogX{{/if}}{{#if title}} | {{title}}{{/if}}">
+    <meta property="og:description" content="{{#if excerpt}}{{excerpt}}{{else}}{{@site.description}}{{/if}}">
+    <meta property="og:image" content="{{#if feature_image}}{{@site.url}}{{feature_image}}{{else}}{{@site.url}}/assets/images/og-default.jpg{{/if}}">
+    <meta property="og:url" content="{{canonical_url}}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{#if title}}{{title}}{{else}}{{@site.title}}{{/if}}">
+    <meta name="twitter:description" content="{{#if excerpt}}{{excerpt}}{{else}}{{@site.description}}{{/if}}">
+    <meta name="twitter:image" content="{{#if feature_image}}{{@site.url}}{{feature_image}}{{else}}{{@site.url}}/assets/images/og-default.jpg{{/if}}">
+
+    {{!-- Title --}}
+    <title>{{#if @site.title}}{{@site.title}}{{else}}BlogX{{/if}}{{#if title}} | {{title}}{{/if}}</title>
+
+    {{!-- Favicon --}}
+    <link rel="icon" type="image/svg+xml" href="{{asset "images/favicon.svg"}}">
+
+    {{!-- Preconnect --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {{!-- Fonts: Inter + JetBrains Mono --}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="canonical" href="{{canonical_url}}">
+    {{!-- Ghost Head Injection --}}
+    {{ghost_head}}
+
+    {{!-- Stylesheet --}}
+    <link rel="stylesheet" href="{{asset "css/style.css"}}">
+
+    {{!-- Reduced Motion Support --}}
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            #grid-canvas { display: none; }
+        }
+    </style>
+</head>
+<body class="{{body_class}}">
+    {{!-- Grid Background Canvas --}}
+    <canvas id="grid-canvas" aria-hidden="true"></canvas>
+
+    {{!-- Skip to Content --}}
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    {{!-- Navigation --}}
+    {{> navigation}}
+
+    {{!-- Main Content --}}
+    <main id="main-content">
+        {{{body}}}
+    </main>
+
+    {{!-- Footer --}}
+    {{> footer}}
+
+    {{!-- Ghost Footer Injection --}}
+    {{ghost_foot}}
+
+    {{!-- JavaScript --}}
+    <script src="{{asset "js/main.js"}}"></script>
+
+    {{!-- Custom Code Injection --}}
+    {{#if @site.codeinjection_foot}}
+    {{{@site.codeinjection_foot}}}
+    {{/if}}
+</body>
+</html>

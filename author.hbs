@@ -1,0 +1,102 @@
+{{!-- ==========================================
+     BlogX Theme - Author Archive Template
+     Design: Technical, Sharp, Tactical
+     ========================================== --}}
+{{!< default}}
+
+{{!-- Author Hero --}}
+<section class="hero fade-in" style="min-height: 50vh; padding: calc(var(--space-32) + 60px) 0 var(--space-16);">
+    <div class="hero__content container" style="text-align: center;">
+        {{#author}}
+        {{#if profile_image}}
+        <div class="author-profile__avatar-wrapper fade-in" style="margin-bottom: var(--space-6);">
+            <img src="{{profile_image}}" alt="{{name}}" width="96" height="96" style="border-radius: var(--radius-md); border: 2px solid var(--border-subtle);">
+        </div>
+        {{else}}
+        <div class="author-profile__avatar-placeholder fade-in" style="width: 96px; height: 96px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary)); display: flex; align-items: center; justify-content: center; font-size: var(--text-3xl); font-weight: 700; color: var(--color-bg-primary); margin: 0 auto var(--space-6);">
+            {{initial}}
+        </div>
+        {{/if}}
+        <h1 class="hero__title fade-in-up">{{name}}</h1>
+        {{#if bio}}
+        <p class="hero__subtitle fade-in-up stagger-1">{{bio}}</p>
+        {{/if}}
+        {{#if location}}
+        <p class="author-profile__location fade-in-up stagger-2" style="margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: var(--space-2); vertical-align: middle;">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            {{location}}
+        </p>
+        {{/if}}
+        {{/author}}
+        <p class="fade-in-up stagger-3" style="margin-top: var(--space-4); color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em;">
+            {{plural posts.length empty="No articles" singular="% article" plural="% articles"}}
+        </p>
+    </div>
+</section>
+
+{{!-- Articles by Author --}}
+<section class="section" style="padding-top: var(--space-8);">
+    <div class="container">
+        {{#if posts}}
+        <div class="grid grid--3">
+            {{#foreach posts}}
+            <article class="card" data-tilt>
+                {{#if feature_image}}
+                <div class="card__image">
+                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy" width="640" height="360">
+                </div>
+                {{/if}}
+                <div class="card__content">
+                    <div class="card__meta">
+                        {{#primary_tag}}
+                        <span class="card__tag">{{name}}</span>
+                        {{/primary_tag}}
+                        <span class="card__date">{{reading_time}}</span>
+                    </div>
+                    <h3 class="card__title">
+                        <a href="{{url}}">{{title}}</a>
+                    </h3>
+                    <p class="card__excerpt">{{excerpt}}</p>
+                    <div class="card__footer">
+                        <div class="card__author">
+                            {{#if primary_author.profile_image}}
+                            <img class="card__author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" width="24" height="24">
+                            {{else}}
+                            <div class="card__author-avatar" style="display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: var(--text-xs); color: var(--color-bg-primary);">
+                                {{primary_author.initial}}
+                            </div>
+                            {{/if}}
+                            <span class="card__author-name">{{primary_author.name}}</span>
+                        </div>
+                        <a href="{{url}}" class="article__share" aria-label="Read {{title}}" style="margin-top: 0;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+
+        {{pagination}}
+        {{else}}
+        <div class="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <h3>No articles yet</h3>
+            <p>This author hasn't published any articles yet.</p>
+            <a href="{{@site.url}}/blog" class="btn btn--secondary" style="margin-top: var(--space-6);">
+                Browse all articles
+            </a>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+{{> newsletter-cta}}

@@ -1,0 +1,30 @@
+{{!-- ==========================================
+     BlogX Theme - Error Page Template (404)
+     Design: Technical, Sharp, Terminal-style
+     ========================================== --}}
+{{!< default}}
+
+<section class="hero" style="min-height: 80vh;">
+    <div class="hero__content container">
+        <div class="hero__terminal">
+            <span class="hero__terminal-dot"></span>
+            <span>ERROR 404</span>
+        </div>
+        <h1 class="hero__title">Page not found</h1>
+        <p class="hero__subtitle">
+            The page you're looking for doesn't exist or has been moved.<br>
+            Let's get you back on track.
+        </p>
+        <div class="hero__cta">
+            <a href="{{@site.url}}" class="btn btn--primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Go Home
+            </a>
+            <a href="{{@site.url}}/blog" class="btn btn--secondary">
+                Browse Articles
+            </a>
+        </div>
+    </div>
+</section>

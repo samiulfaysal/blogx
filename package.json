@@ -1,0 +1,40 @@
+{
+  "name": "blogx-theme",
+  "description": "BlogX - High-Velocity Content Architecture. A technical, sharp Ghost CMS theme inspired by SpaceX, Vercel, and Linear",
+  "demo": "https://blogx.io",
+  "license": "MIT",
+  "engines": {
+    "ghost": ">=4.0.0"
+  },
+  "keywords": [
+    "ghost-theme",
+    "blogx",
+    "technical",
+    "sharp",
+    "startup",
+    "dark-theme",
+    "SaaS",
+    "editorial"
+  ],
+  "author": {
+    "name": "BlogX",
+    "email": "hello@blogx.io",
+    "url": "https://blogx.io"
+  },
+  "config": {
+    "posts_per_page": 9,
+    "image_sizes": {
+      "xxs": { "width": 30 },
+      "xs": { "width": 100 },
+      "s": { "width": 300 },
+      "m": { "width": 600 },
+      "l": { "width": 1000 },
+      "xl": { "width": 2000 }
+    },
+    "card_assets": {
+      "featured": { "size": "l" },
+      "image": { "size": "m" }
+    }
+  },
+  "version": "2.0.0"
+}
