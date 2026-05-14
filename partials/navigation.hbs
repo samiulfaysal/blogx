@@ -29,10 +29,14 @@
                 <li><a href="{{@site.url}}/contact" class="nav__link">Contact</a></li>
             </ul>
 
-            <div class="nav__actions">
-                <a href="{{@site.url}}/subscribe" class="nav__cta">
-                    Subscribe
-                </a>
+<div class="nav__actions">
+                {{#if @member}}
+                    <a href="#/portal/account" class="nav__link" data-portal="account">Account</a>
+                    <a href="#/portal/signout" class="nav__link" style="color: var(--color-text-muted);" data-members-signout>Sign Out</a>
+                {{else}}
+                    <a href="#/portal/signin" class="nav__link" data-portal="signin">Sign In</a>
+                    <a href="#/portal/signup" class="nav__cta" data-portal="signup">Subscribe</a>
+                {{/if}}
             </div>
 
             <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">

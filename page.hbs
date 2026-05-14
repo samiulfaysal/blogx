@@ -4,34 +4,9 @@
      ========================================== --}}
 {{!< default}}
 
-{{!-- Code Injection Support --}}
-{{#if codeinjection_head}}
-{{{codeinjection_head}}}
-{{/if}}
+{{#post}}
 
-<article class="article {{#if feature_image}}has-feature-image{{/if}} {{#if page}}is-page{{/if}}">
-    {{!-- Page Context Indicator --}}
-    <div class="article__terminal fade-in">
-        <div class="article__terminal-item">
-            <span>TYPE:</span>
-            Static Page
-        </div>
-        {{#if custom_excerpt}}
-        <div class="article__terminal-item">
-            <span>SUMMARY:</span>
-            {{custom_excerpt}}
-        </div>
-        {{/if}}
-        {{#unless custom_excerpt}}
-        {{#if excerpt}}
-        <div class="article__terminal-item">
-            <span>SUMMARY:</span>
-            {{excerpt}}
-        </div>
-        {{/if}}
-        {{/unless}}
-    </div>
-
+<article class="article {{#if feature_image}}has-feature-image{{/if}} {{#if page}}is-page{{/if}} {{post_class}}">
     {{!-- Page Header --}}
     <header class="article__header">
         {{#if @page.show_title_and_feature_image}}
@@ -130,9 +105,6 @@
     {{/if}}
 </article>
 
-{{!-- Code Injection Footer Support --}}
-{{#if codeinjection_foot}}
-{{{codeinjection_foot}}}
-{{/if}}
+{{/post}}
 
 {{> newsletter-cta}}

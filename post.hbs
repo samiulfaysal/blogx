@@ -4,10 +4,7 @@
      ========================================== --}}
 {{!< default}}
 
-{{!-- Code Injection Support --}}
-{{#if codeinjection_head}}
-{{{codeinjection_head}}}
-{{/if}}
+{{#post}}
 
 {{!-- Post-specific SEO --}}
 <meta property="og:type" content="article">
@@ -17,35 +14,9 @@
 
 <article class="article">
     {{!-- Terminal Metadata Bar --}}
-    <div class="article__terminal fade-in">
-        <div class="article__terminal-item">
-            <span>TAG:</span>
-            {{#primary_tag}}{{name}}{{/primary_tag}}
-        </div>
-        <div class="article__terminal-item">
-            <span>READ:</span>
-            {{reading_time}}
-        </div>
-        <div class="article__terminal-item">
-            <span>DATE:</span>
-            {{#if published_at}}{{date published_at format="YYYY-MM-DD"}}{{/if}}
-        </div>
-        {{#if featured}}
-        <div class="article__terminal-item">
-            <span>FEATURED</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--color-accent-secondary)">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-        </div>
-        {{/if}}
-    </div>
 
     {{!-- Article Header --}}
     <header class="article__header">
-        {{#primary_tag}}
-        <span class="article__tag">{{name}}</span>
-        {{/primary_tag}}
-
         <h1 class="article__title fade-in-up stagger-1">{{title}}</h1>
 
         {{#if excerpt}}
@@ -53,7 +24,19 @@
         {{/if}}
 
         {{!-- Author Info --}}
-        <div class="article__meta fade-in-up stagger-3">
+<div class="article__meta fade-in-up stagger-3">
+            {{!-- 1. Tag --}}
+            {{#primary_tag}}
+            <div class="article__meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                </svg>
+                <a href="{{url}}" style="color: var(--color-accent-primary); border: none;">{{name}}</a>
+            </div>
+            {{/primary_tag}}
+
+            {{!-- 2. Author --}}
             {{#if primary_author}}
             <a href="{{primary_author.url}}" class="article__meta-item article__meta-item--link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -63,6 +46,8 @@
                 {{primary_author.name}}
             </a>
             {{/if}}
+
+            {{!-- 3. Date --}}
             <div class="article__meta-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -70,10 +55,12 @@
                 </svg>
                 {{#if published_at}}{{date published_at format="MMMM D, YYYY"}}{{/if}}
             </div>
+
+            {{!-- 4. Reading Time --}}
             <div class="article__meta-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
                 {{reading_time}}
             </div>
@@ -158,9 +145,12 @@
     {{/if}}
 </article>
 
-{{!-- Related Posts --}}
-{{#if posts}}
-{{#has tag="count:3"}}
+{{/post}}
+
+{{!-- Related Posts (via get query) --}}
+{{#if primary_tag}}
+{{#get "posts" filter="tags:[{{primary_tag.slug}}]+id:-{{id}}" limit="3" include="authors,tags" as |related|}}
+{{#if related}}
 <section class="section">
     <div class="container">
         <header class="section-header">
@@ -169,7 +159,7 @@
         </header>
 
         <div class="grid grid--3">
-            {{#foreach posts}}
+            {{#foreach related}}
             <article class="card" data-tilt>
                 {{#if feature_image}}
                 <div class="card__image">
@@ -193,12 +183,8 @@
         </div>
     </div>
 </section>
-{{/has}}
 {{/if}}
-
-{{!-- Code Injection Footer Support --}}
-{{#if codeinjection_foot}}
-{{{codeinjection_foot}}}
+{{/get}}
 {{/if}}
 
 {{> newsletter-cta}}

@@ -60,7 +60,55 @@
     </div>
 </section>
 
-{{!-- Discovery Row --}}
+{{!-- Main Feed - Modular Grid (Posts #5+) --}}
+<section class="main-feed" id="posts">
+    <div class="container">
+        {{#if posts}}
+        <div class="grid grid--2 main-feed__grid">
+            {{#foreach posts from="5"}}
+            <article class="card article-card" data-tilt>
+                {{#if feature_image}}
+                <div class="card__image">
+                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy" width="640" height="360">
+                </div>
+                {{/if}}
+                <div class="card__content">
+                    <div class="card__meta">
+                        {{#primary_tag}}
+                        <span class="card__tag">{{name}}</span>
+                        {{/primary_tag}}
+                        <span class="card__date">{{reading_time}}</span>
+                    </div>
+                    <h3 class="card__title">
+                        <a href="{{url}}">{{title}}</a>
+                    </h3>
+                    <p class="card__excerpt">{{excerpt}}</p>
+                    <div class="card__footer">
+                        <div class="card__author">
+                            {{#if primary_author.profile_image}}
+                            <img class="card__author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" width="24" height="24">
+                            {{else}}
+                            <div class="card__author-avatar"></div>
+                            {{/if}}
+                            <span class="card__author-name">{{primary_author.name}}</span>
+                        </div>
+                        <span class="card__timestamp">{{reading_time}}</span>
+                    </div>
+                </div>
+            </article>
+            {{/foreach}}
+        </div>
+        {{else}}
+        <div style="text-align: center; padding: var(--space-16) 0;">
+            <p style="color: var(--color-text-muted); font-family: var(--font-mono);">No transmissions yet. Check back soon.</p>
+        </div>
+        {{/if}}
+
+        {{pagination}}
+    </div>
+</section>
+
+{{!-- Discovery Row (now positioned as pre-footer) --}}
 <section class="discovery-row">
     <div class="container">
         <div class="discovery-row__grid">
@@ -127,59 +175,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-{{!-- Main Feed - Modular Grid (Posts #5+) --}}
-<section class="main-feed" id="posts">
-    <div class="container">
-        <header class="section-header fade-in-up">
-            <span class="section-header__eyebrow">Latest Transmissions</span>
-            <h2 class="section-header__title">Engineering Intel</h2>
-        </header>
-
-        {{#if posts}}
-        <div class="grid grid--2 main-feed__grid">
-            {{#foreach posts from="5"}}
-            <article class="card article-card" data-tilt>
-                {{#if feature_image}}
-                <div class="card__image">
-                    <img src="{{feature_image}}" alt="{{title}}" loading="lazy" width="640" height="360">
-                </div>
-                {{/if}}
-                <div class="card__content">
-                    <div class="card__meta">
-                        {{#primary_tag}}
-                        <span class="card__tag">{{name}}</span>
-                        {{/primary_tag}}
-                        <span class="card__date">{{reading_time}}</span>
-                    </div>
-                    <h3 class="card__title">
-                        <a href="{{url}}">{{title}}</a>
-                    </h3>
-                    <p class="card__excerpt">{{excerpt}}</p>
-                    <div class="card__footer">
-                        <div class="card__author">
-                            {{#if primary_author.profile_image}}
-                            <img class="card__author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" width="24" height="24">
-                            {{else}}
-                            <div class="card__author-avatar"></div>
-                            {{/if}}
-                            <span class="card__author-name">{{primary_author.name}}</span>
-                        </div>
-                        <span class="card__timestamp">{{reading_time}}</span>
-                    </div>
-                </div>
-            </article>
-            {{/foreach}}
-        </div>
-        {{else}}
-        <div style="text-align: center; padding: var(--space-16) 0;">
-            <p style="color: var(--color-text-muted); font-family: var(--font-mono);">No transmissions yet. Check back soon.</p>
-        </div>
-        {{/if}}
-
-        {{pagination}}
     </div>
 </section>
 
