@@ -284,6 +284,29 @@
     }
 
     // ==========================================
+    // Theme Toggle System
+    // ==========================================
+    class ThemeToggle {
+        constructor() {
+            this.button = document.getElementById('theme-toggle');
+            this.html = document.documentElement;
+            if (this.button) {
+                this.bindEvents();
+            }
+        }
+
+        bindEvents() {
+            this.button.addEventListener('click', () => {
+                const currentTheme = this.html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                this.html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('blogx_theme', newTheme);
+            });
+        }
+    }
+
+    // ==========================================
     // Initialize All Systems
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
@@ -342,6 +365,13 @@
             new SmoothScroll();
         } catch (e) {
             console.warn('SmoothScroll initialization failed:', e);
+        }
+
+        // Theme toggle
+        try {
+            new ThemeToggle();
+        } catch (e) {
+            console.warn('ThemeToggle initialization failed:', e);
         }
     });
 

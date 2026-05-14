@@ -53,6 +53,12 @@
             #grid-canvas { display: none; }
         }
     </style>
+
+    <script>
+        // Set theme before DOM loads to prevent flash
+        const savedTheme = localStorage.getItem('blogx_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </head>
 <body class="{{body_class}}">
     {{!-- Grid Background Canvas --}}

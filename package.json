@@ -34,6 +34,13 @@
     "card_assets": {
       "featured": { "size": "l" },
       "image": { "size": "m" }
+    },
+    "custom": {
+      "brand_mission": {
+        "type": "text",
+        "default": "Engineering complex infrastructure into beautifully simple digital experiences.",
+        "group": "homepage"
+      }
     }
   },
   "version": "2.0.0"
